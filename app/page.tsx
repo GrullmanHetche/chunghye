@@ -31,7 +31,7 @@ export default function Home() {
         <div className="absolute inset-x-0 bottom-[24vh] h-[20vh] z-2 bg-black opacity-50" />
       </div>
 
-      {/* --- 강력하게 집중된 단일 스포트라이트 (image_11.png 기반) --- */}
+      {/* --- 빛이 촥 퍼지는 강력한 스포트라이트 (핵심 수정) --- */}
       <div className="absolute inset-0 z-2 pointer-events-none">
         {/* 1. 상단 광원 (빛의 시작점) */}
         <div className="absolute top-[2vh] left-1/2 -translate-x-1/2 w-[10vw] h-[10vw] rounded-full z-10"
@@ -41,20 +41,20 @@ export default function Home() {
           }}
         />
         
-        {/* 2. 하강하는 강력한 원추형 빛줄기 (image_11.png 느낌) */}
+        {/* 2. 하강하는 원추형 빛줄기 (image_11.png 느낌 유지) */}
         <div className="absolute top-[5vh] left-1/2 -translate-x-1/2 w-[1vw] h-[65vh] origin-top"
           style={{
             background: 'linear-gradient(to bottom, white 0%, transparent 100%)',
-            filter: 'blur(20px)', // 강력한 흐림 효과로 빛줄기 표현
+            filter: 'blur(20px)',
             opacity: 0.8,
           }}
         />
         
-        {/* 3. 무대 바닥 강력하게 집중된 단일 원형 광원 */}
-        <div className="absolute bottom-[28vh] left-1/2 -translate-x-1/2 w-[35vw] h-[15vw] rounded-full opacity-90 z-20"
+        {/* 3. 무대 바닥 촥 퍼지는 광원 (Radial Gradient 수정) */}
+        <div className="absolute bottom-[24vh] left-1/2 -translate-x-1/2 w-[40vw] h-[20vw] rounded-full opacity-1 z-20"
           style={{
-            background: 'radial-gradient(ellipse at center, white 15%, #eee 45%, rgba(100,100,100,0.5) 75%, transparent 100%)',
-            filter: 'blur(10px)', // image_11.png처럼 가장자리가 덜 흐리게
+            background: 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0.3) 60%, transparent 90%)',
+            filter: 'blur(15px)', // 가장자리 흐림 효과 감소로 image_14.png 느낌
           }} 
         />
       </div>
