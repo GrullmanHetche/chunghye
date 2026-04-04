@@ -31,30 +31,32 @@ export default function Home() {
         <div className="absolute inset-x-0 bottom-[24vh] h-[20vh] z-2 bg-black opacity-50" />
       </div>
 
-      {/* --- 빛이 촥 퍼지는 강력한 스포트라이트 (핵심 수정) --- */}
-      <div className="absolute inset-0 z-2 pointer-events-none">
-        {/* 1. 상단 광원 (빛의 시작점) */}
-        <div className="absolute top-[2vh] left-1/2 -translate-x-1/2 w-[10vw] h-[10vw] rounded-full z-10"
+      {/* --- 위에서 세모낳게 퍼지는 강력한 스포트라이트 (핵심 부활) --- */}
+      <div className="absolute inset-0 z-2 pointer-events-none flex justify-center">
+        
+        {/* 1. 상단 광원 (빛의 시작점, image_11.png 느낌) */}
+        <div className="absolute top-[2vh] w-[12vw] h-[12vw] rounded-full z-10"
           style={{
-            background: 'radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(200, 200, 200, 0.5) 50%, transparent 80%)',
-            filter: 'blur(5px)',
+            background: 'radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(200, 200, 200, 0.4) 50%, transparent 80%)',
+            filter: 'blur(8px)',
           }}
         />
         
-        {/* 2. 하강하는 원추형 빛줄기 (image_11.png 느낌 유지) */}
-        <div className="absolute top-[5vh] left-1/2 -translate-x-1/2 w-[1vw] h-[65vh] origin-top"
+        {/* 2. 하강하며 세모낳게 퍼지는 빛줄기 (image_11.png 느낌) */}
+        <div className="absolute top-[6vh] w-[20vw] h-[70vh] origin-top opacity-90 z-10"
           style={{
-            background: 'linear-gradient(to bottom, white 0%, transparent 100%)',
-            filter: 'blur(20px)',
-            opacity: 0.8,
+            // 세모난 형태를 만들기 위해 conic-gradient 사용
+            background: 'conic-gradient(from 180deg at 50% 0%, white 0deg, rgba(255,255,255,0.8) 15deg, transparent 30deg, transparent 330deg, rgba(255,255,255,0.8) 345deg, white 360deg)',
+            filter: 'blur(25px)', // 강력한 흐림 효과로 퍼지는 느낌 표현
+            transform: 'scaleX(2.5)', // 가로로 더 넓게 퍼지게
           }}
         />
         
-        {/* 3. 무대 바닥 촥 퍼지는 광원 (Radial Gradient 수정) */}
-        <div className="absolute bottom-[24vh] left-1/2 -translate-x-1/2 w-[40vw] h-[20vw] rounded-full opacity-1 z-20"
+        {/* 3. 무대 바닥 강력하게 집중된 단일 원형 광원 */}
+        <div className="absolute bottom-[26vh] w-[40vw] h-[15vw] rounded-full opacity-90 z-20"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0.3) 60%, transparent 90%)',
-            filter: 'blur(15px)', // 가장자리 흐림 효과 감소로 image_14.png 느낌
+            background: 'radial-gradient(ellipse at center, white 15%, #eee 45%, rgba(100,100,100,0.5) 75%, transparent 100%)',
+            filter: 'blur(10px)',
           }} 
         />
       </div>
