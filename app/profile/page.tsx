@@ -8,10 +8,10 @@ const PALETTE_B = ["#C4956A", "#E8818A", "#D4667A", "#B8C8D8"];
 
 // ── 이미지 경로 (public/ 아래에 파일 넣으면 됩니다) ───────────
 const IMG = {
-  leftnngcc:  "/images/leftnngcc.png",   // A 나나곰 쿠키 (sd)
-  leftnngbgt: "/images/leftnngbgt.png",  // A 나나곰 바게트 (full)
-  rightnngbgt:"/images/rightnngbgt.png", // B 나나곰 바게트 (full)
-  rightnngcc: "/images/rightnngcc.png",  // B 나나곰 쿠키 (sd)
+  leftnngcc:  "/images/leftnngcc.png",
+  leftnngbgt: "/images/leftnngbgt.png",
+  rightnngbgt:"/images/rightnngbgt.png",
+  rightnngcc: "/images/rightnngcc.png",
 };
 
 // ── 캐릭터 정보 ───────────────────────────────────────────────
@@ -93,11 +93,13 @@ function CharCard({
   bgt,
   cc,
   side,
+  bgtHeight,
 }: {
   char: typeof CHAR_A;
   bgt: string;
   cc: string;
   side: "left" | "right";
+  bgtHeight: number;
 }) {
   const isLeft = side === "left";
   const accent = char.palette[2];
@@ -194,12 +196,12 @@ function CharCard({
       {/* 컬러 팔레트 */}
       <ColorPalette colors={char.palette} side={side} />
 
-      {/* 바게트 (full body) — 고정 높이로 양쪽 통일 */}
+      {/* 바게트 (full body) — 각자 다른 height */}
       <div
         style={{
           width: "100%",
           position: "relative",
-          height: 400,
+          height: bgtHeight,
         }}
       >
         <Image
@@ -331,12 +333,13 @@ export default function ProfilePage() {
             alignItems: "flex-start",
           }}
         >
-          {/* ── A: 명설우 ── */}
+          {/* ── A: 명설우 — height 크게 ── */}
           <CharCard
             char={CHAR_A}
             bgt={IMG.leftnngbgt}
             cc={IMG.leftnngcc}
             side="left"
+            bgtHeight={500}
           />
 
           {/* 중앙 구분선 */}
@@ -369,12 +372,13 @@ export default function ProfilePage() {
             </span>
           </div>
 
-          {/* ── B: 남예준 ── */}
+          {/* ── B: 남예준 — height 작게 ── */}
           <CharCard
             char={CHAR_B}
             bgt={IMG.rightnngbgt}
             cc={IMG.rightnngcc}
             side="right"
+            bgtHeight={320}
           />
         </div>
 
