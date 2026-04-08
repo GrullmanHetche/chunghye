@@ -148,7 +148,7 @@ export default function ProfilePage() {
           </div>
 
           {/* ── 2행: 바게트 이미지 (같은 행, 발끝 정렬) ── */}
-          <div style={{ display: "flex", gap: 0, alignItems: "flex-end", marginTop: 32 }}>
+          <div style={{ display: "flex", gap: 0, alignItems: "flex-end", marginTop: 12 }}>
 
             {/* A 바게트 */}
             <div style={{ flex: 1, position: "relative", height: 500 }}>
@@ -203,9 +203,37 @@ export default function ProfilePage() {
 
         </div>
 
-        <p style={{ textAlign: "center", marginTop: 32, fontSize: 11, color: "var(--muted)", letterSpacing: "0.04em" }}>
-          보는 사람을 기준으로 합니다. 색에 민감하지 않습니다.
-        </p>
+        <div style={{ textAlign: "center", marginTop: 40 }}>
+          <a
+            href="/"
+            style={{
+              display: "inline-block",
+              padding: "10px 32px",
+              fontSize: 11,
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: "var(--muted)",
+              border: "1px solid var(--border)",
+              borderRadius: 999,
+              textDecoration: "none",
+              fontFamily: font,
+              transition: "all .2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "var(--fg)";
+              e.currentTarget.style.borderColor = "var(--divider)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "var(--muted)";
+              e.currentTarget.style.borderColor = "var(--border)";
+            }}
+          >
+            ← Main
+          </a>
+          <p style={{ marginTop: 20, fontSize: 11, color: "var(--muted)", letterSpacing: "0.04em" }}>
+            보는 사람을 기준으로 합니다. 색에 민감하지 않습니다.
+          </p>
+        </div>
       </main>
     </>
   );
