@@ -330,7 +330,7 @@ export default function ProfilePage() {
             padding: "48px 40px",
             display: "flex",
             gap: 0,
-            alignItems: "flex-start",
+            alignItems: "flex-end",
           }}
         >
           {/* ── A: 명설우 — height 크게 ── */}
