@@ -18,7 +18,7 @@ const IMG = {
 const CHAR_A = {
   id: "A",
   name: "명설우",
-  tags: ["#무뚝한", "#감정적인", "#이타적인"],
+  tags: ["#무뚝뚝한", "#감정적인", "#이타적인"],
   info: ["XY / 23세 (대학생)", "177cm / 마른 체형"],
   desc: [
     "B와 같은 대학교, 연영과 연출/조명 전공",
@@ -194,21 +194,19 @@ function CharCard({
       {/* 컬러 팔레트 */}
       <ColorPalette colors={char.palette} side={side} />
 
-      {/* 바게트 (full body) */}
+      {/* 바게트 (full body) — 고정 높이로 양쪽 통일 */}
       <div
         style={{
           width: "100%",
-          display: "flex",
-          justifyContent: "center",
           position: "relative",
-          height: 320,
+          height: 400,
         }}
       >
         <Image
           src={bgt}
           alt={`${char.name} full`}
           fill
-          style={{ objectFit: "contain", objectPosition: "bottom" }}
+          style={{ objectFit: "contain", objectPosition: "center bottom" }}
           priority
         />
       </div>
@@ -223,8 +221,8 @@ function CharCard({
           width: "100%",
         }}
       >
-        <div style={{ position: "relative", width: 100, height: 120, flexShrink: 0 }}>
-          <Image src={cc} alt={`${char.name} sd`} fill style={{ objectFit: "contain" }} />
+        <div style={{ position: "relative", width: 110, height: 130, flexShrink: 0 }}>
+          <Image src={cc} alt={`${char.name} sd`} fill style={{ objectFit: "contain", objectPosition: "bottom" }} />
         </div>
         <ul
           style={{
@@ -371,7 +369,7 @@ export default function ProfilePage() {
             </span>
           </div>
 
-          {/* ── B: 남예존 ── */}
+          {/* ── B: 남예준 ── */}
           <CharCard
             char={CHAR_B}
             bgt={IMG.rightnngbgt}
