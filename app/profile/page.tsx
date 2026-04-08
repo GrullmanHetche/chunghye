@@ -52,13 +52,14 @@ const CHAR_B = {
   palette: PALETTE_B,
 };
 
+const font = "'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif";
+
 function ColorPalette({ colors, side }: { colors: string[]; side: "left" | "right" }) {
   return (
-    <div style={{ display: "flex", gap: 6, justifyContent: side === "right" ? "flex-end" : "flex-start", flexWrap: "wrap" }}>
+    <div style={{ display: "flex", gap: 6, justifyContent: side === "right" ? "flex-end" : "flex-start" }}>
       {colors.map((c) => (
         <div
-          key={c}
-          title={c}
+          key={c} title={c}
           style={{
             width: 36, height: 36, borderRadius: 6, background: c,
             boxShadow: "0 1px 4px rgba(0,0,0,.15)", cursor: "default",
@@ -68,79 +69,6 @@ function ColorPalette({ colors, side }: { colors: string[]; side: "left" | "righ
           onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
         />
       ))}
-    </div>
-  );
-}
-
-function CharCard({
-  char, bgt, cc, side, bgtHeight,
-}: {
-  char: typeof CHAR_A; bgt: string; cc: string;
-  side: "left" | "right"; bgtHeight: number;
-}) {
-  const isLeft = side === "left";
-  const accent = char.palette[2];
-  const font = "'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif";
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column", flex: 1, minWidth: 0 }}>
-
-      {/* ── 텍스트 영역 (고정 높이로 양쪽 높이 통일) ── */}
-      <div style={{
-        display: "flex", flexDirection: "column",
-        alignItems: isLeft ? "flex-start" : "flex-end",
-        gap: 12, height: 220,
-      }}>
-        {/* 태그 */}
-        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", justifyContent: isLeft ? "flex-start" : "flex-end" }}>
-          {char.tags.map((t) => (
-            <span key={t} style={{ fontSize: 11, color: accent, fontFamily: font, letterSpacing: "0.03em" }}>{t}</span>
-          ))}
-        </div>
-        {/* 이름 */}
-        <div style={{ display: "flex", alignItems: "center", gap: 10, flexDirection: isLeft ? "row" : "row-reverse" }}>
-          <span style={{
-            width: 28, height: 28, borderRadius: "50%", background: accent,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            color: "#fff", fontSize: 13, fontWeight: 700, fontFamily: font, flexShrink: 0,
-          }}>{char.id}</span>
-          <h2 style={{ fontSize: 26, fontWeight: 700, margin: 0, letterSpacing: "0.12em", fontFamily: font, color: "var(--fg)" }}>
-            {char.name}
-          </h2>
-        </div>
-        {/* 기본 정보 */}
-        <div style={{ fontSize: 12, lineHeight: 1.9, color: "var(--muted)", textAlign: isLeft ? "left" : "right", fontFamily: font }}>
-          {char.info.map((l) => <div key={l}>{l}</div>)}
-          <div style={{ marginTop: 6 }}>{char.desc.map((l) => <div key={l}>{l}</div>)}</div>
-        </div>
-        {/* 컬러 팔레트 */}
-        <ColorPalette colors={char.palette} side={side} />
-      </div>
-
-      {/* ── 바게트 (텍스트 영역 바로 아래, 고정 height) ── */}
-      <div style={{ position: "relative", width: "100%", height: bgtHeight }}>
-        <Image
-          src={bgt} alt={`${char.name} full`} fill priority
-          style={{ objectFit: "contain", objectPosition: "center bottom" }}
-        />
-      </div>
-
-      {/* ── 쿠키 + 특징 ── */}
-      <div style={{
-        display: "flex", gap: 16, alignItems: "flex-end",
-        flexDirection: isLeft ? "row" : "row-reverse", width: "100%", marginTop: 16,
-      }}>
-        <div style={{ position: "relative", width: 110, height: 130, flexShrink: 0 }}>
-          <Image src={cc} alt={`${char.name} sd`} fill style={{ objectFit: "contain", objectPosition: "bottom" }} />
-        </div>
-        <ul style={{
-          listStyle: "none", padding: 0, margin: 0,
-          fontSize: 11.5, lineHeight: 2, color: "var(--muted)",
-          textAlign: isLeft ? "left" : "right", fontFamily: font,
-        }}>
-          {char.features.map((f) => <li key={f}>— {f}</li>)}
-        </ul>
-      </div>
     </div>
   );
 }
@@ -163,17 +91,13 @@ export default function ProfilePage() {
         body { margin: 0; background: var(--bg); }
       `}</style>
 
-      <main style={{
-        minHeight: "100vh", background: "var(--bg)", padding: "60px 24px 80px",
-        fontFamily: "'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
-      }}>
+      <main style={{ minHeight: "100vh", background: "var(--bg)", padding: "60px 24px 80px", fontFamily: font }}>
+
         <header style={{ textAlign: "center", marginBottom: 56 }}>
           <p style={{ fontSize: 11, letterSpacing: "0.25em", color: "var(--muted)", margin: "0 0 12px", textTransform: "uppercase" }}>
             설예 — 페어표
           </p>
-          <h1 style={{ fontSize: 38, fontWeight: 800, margin: 0, letterSpacing: "0.18em", color: "var(--fg)" }}>
-            설예
-          </h1>
+          <h1 style={{ fontSize: 38, fontWeight: 800, margin: 0, letterSpacing: "0.18em", color: "var(--fg)" }}>설예</h1>
           <p style={{ marginTop: 10, fontSize: 12, color: "var(--muted)", letterSpacing: "0.06em" }}>
             #대학생&nbsp;&nbsp;#구원서사
           </p>
@@ -181,26 +105,102 @@ export default function ProfilePage() {
 
         <div style={{
           maxWidth: 900, margin: "0 auto", background: "var(--card)",
-          borderRadius: 20, border: "1px solid var(--border)",
-          padding: "48px 40px", display: "flex", gap: 0, alignItems: "flex-start",
+          borderRadius: 20, border: "1px solid var(--border)", padding: "48px 40px",
         }}>
-          <CharCard char={CHAR_A} bgt={IMG.leftnngbgt} cc={IMG.leftnngcc} side="left" bgtHeight={500} />
 
-          {/* 중앙 구분선 */}
-          <div style={{
-            width: 1, alignSelf: "stretch", background: "var(--divider)",
-            margin: "0 36px", flexShrink: 0, position: "relative",
-          }}>
-            <span style={{
-              position: "absolute", top: "50%", left: "50%",
-              transform: "translate(-50%, -50%)",
-              background: "var(--card)", padding: "4px 0",
-              fontSize: 11, color: "var(--muted)", letterSpacing: "0.1em",
-              whiteSpace: "nowrap", writingMode: "vertical-rl",
-            }}>✦  PAIR  ✦</span>
+          {/* ── 1행: 텍스트 (A | 구분선 | B) ── */}
+          <div style={{ display: "flex", gap: 0, alignItems: "flex-start" }}>
+
+            {/* A 텍스트 */}
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 12 }}>
+              <div style={{ display: "flex", gap: 6 }}>
+                {CHAR_A.tags.map((t) => <span key={t} style={{ fontSize: 11, color: CHAR_A.palette[2], fontFamily: font, letterSpacing: "0.03em" }}>{t}</span>)}
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <span style={{ width: 28, height: 28, borderRadius: "50%", background: CHAR_A.palette[2], display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 13, fontWeight: 700, fontFamily: font, flexShrink: 0 }}>A</span>
+                <h2 style={{ fontSize: 26, fontWeight: 700, margin: 0, letterSpacing: "0.12em", fontFamily: font, color: "var(--fg)" }}>명설우</h2>
+              </div>
+              <div style={{ fontSize: 12, lineHeight: 1.9, color: "var(--muted)", fontFamily: font }}>
+                {CHAR_A.info.map((l) => <div key={l}>{l}</div>)}
+                <div style={{ marginTop: 6 }}>{CHAR_A.desc.map((l) => <div key={l}>{l}</div>)}</div>
+              </div>
+              <ColorPalette colors={CHAR_A.palette} side="left" />
+            </div>
+
+            {/* 구분선 */}
+            <div style={{ width: 1, alignSelf: "stretch", background: "var(--divider)", margin: "0 36px", flexShrink: 0 }} />
+
+            {/* B 텍스트 */}
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 12 }}>
+              <div style={{ display: "flex", gap: 6 }}>
+                {CHAR_B.tags.map((t) => <span key={t} style={{ fontSize: 11, color: CHAR_B.palette[2], fontFamily: font, letterSpacing: "0.03em" }}>{t}</span>)}
+              </div>
+              <div style={{ display: "flex", alignItems: "center", flexDirection: "row-reverse", gap: 10 }}>
+                <span style={{ width: 28, height: 28, borderRadius: "50%", background: CHAR_B.palette[2], display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 13, fontWeight: 700, fontFamily: font, flexShrink: 0 }}>B</span>
+                <h2 style={{ fontSize: 26, fontWeight: 700, margin: 0, letterSpacing: "0.12em", fontFamily: font, color: "var(--fg)" }}>남예준</h2>
+              </div>
+              <div style={{ fontSize: 12, lineHeight: 1.9, color: "var(--muted)", textAlign: "right", fontFamily: font }}>
+                {CHAR_B.info.map((l) => <div key={l}>{l}</div>)}
+                <div style={{ marginTop: 6 }}>{CHAR_B.desc.map((l) => <div key={l}>{l}</div>)}</div>
+              </div>
+              <ColorPalette colors={CHAR_B.palette} side="right" />
+            </div>
           </div>
 
-          <CharCard char={CHAR_B} bgt={IMG.rightnngbgt} cc={IMG.rightnngcc} side="right" bgtHeight={320} />
+          {/* ── 2행: 바게트 이미지 (같은 행, 발끝 정렬) ── */}
+          <div style={{ display: "flex", gap: 0, alignItems: "flex-end", marginTop: 32 }}>
+
+            {/* A 바게트 */}
+            <div style={{ flex: 1, position: "relative", height: 500 }}>
+              <Image src={IMG.leftnngbgt} alt="명설우 full" fill priority
+                style={{ objectFit: "contain", objectPosition: "center bottom" }} />
+            </div>
+
+            {/* 구분선 중앙 표시 */}
+            <div style={{ width: 1, alignSelf: "stretch", background: "var(--divider)", margin: "0 36px", flexShrink: 0, position: "relative" }}>
+              <span style={{
+                position: "absolute", top: "50%", left: "50%",
+                transform: "translate(-50%, -50%)",
+                background: "var(--card)", padding: "4px 0",
+                fontSize: 11, color: "var(--muted)", letterSpacing: "0.1em",
+                whiteSpace: "nowrap", writingMode: "vertical-rl",
+              }}>✦  PAIR  ✦</span>
+            </div>
+
+            {/* B 바게트 */}
+            <div style={{ flex: 1, position: "relative", height: 320 }}>
+              <Image src={IMG.rightnngbgt} alt="남예준 full" fill priority
+                style={{ objectFit: "contain", objectPosition: "center bottom" }} />
+            </div>
+          </div>
+
+          {/* ── 3행: 쿠키 + 특징 ── */}
+          <div style={{ display: "flex", gap: 0, alignItems: "flex-start", marginTop: 24 }}>
+
+            {/* A 쿠키 + 특징 */}
+            <div style={{ flex: 1, display: "flex", gap: 16, alignItems: "flex-end" }}>
+              <div style={{ position: "relative", width: 110, height: 130, flexShrink: 0 }}>
+                <Image src={IMG.leftnngcc} alt="명설우 sd" fill style={{ objectFit: "contain", objectPosition: "bottom" }} />
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: 11.5, lineHeight: 2, color: "var(--muted)", fontFamily: font }}>
+                {CHAR_A.features.map((f) => <li key={f}>— {f}</li>)}
+              </ul>
+            </div>
+
+            {/* 구분선 */}
+            <div style={{ width: 1, alignSelf: "stretch", background: "var(--divider)", margin: "0 36px", flexShrink: 0 }} />
+
+            {/* B 쿠키 + 특징 */}
+            <div style={{ flex: 1, display: "flex", flexDirection: "row-reverse", gap: 16, alignItems: "flex-end" }}>
+              <div style={{ position: "relative", width: 110, height: 130, flexShrink: 0 }}>
+                <Image src={IMG.rightnngcc} alt="남예준 sd" fill style={{ objectFit: "contain", objectPosition: "bottom" }} />
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: 11.5, lineHeight: 2, color: "var(--muted)", textAlign: "right", fontFamily: font }}>
+                {CHAR_B.features.map((f) => <li key={f}>— {f}</li>)}
+              </ul>
+            </div>
+          </div>
+
         </div>
 
         <p style={{ textAlign: "center", marginTop: 32, fontSize: 11, color: "var(--muted)", letterSpacing: "0.04em" }}>
