@@ -75,8 +75,8 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none" />
       </div>
 
-      {/* --- 하단 메뉴 --- */}
-      <nav className="relative z-[60] w-full flex flex-row items-center justify-center gap-18 pb-10 mb-2">
+      {/* --- 하단 메뉴 (위치 조정됨) --- */}
+      <nav className="mt-auto relative z-[60] w-full flex flex-row items-center justify-center gap-18 pb-6">
         <TinyMenuButton title="PROFILE" href="/profile" />
         <TinyMenuButton title="BAG" href="/bag" />
         <TinyMenuButton title="TIMETABLE" href="/login" />
