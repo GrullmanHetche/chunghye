@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chunghye — A Worldbuilding Website
 
-## Getting Started
+A creative worldbuilding project that uses a website to establish the atmosphere of a fictional setting and introduce its characters.
 
-First, run the development server:
+[Visit the site](https://chunghye.vercel.app)
 
-```bash
+## Why I built it
+
+I wanted the setting to be felt before it was explained. The opening screen presents a quiet theater: red curtains, a dark stage, a focused beam of light, and rows of seats.
+
+From there, the character profile page brings the world into a more intimate format, arranging personalities, appearances, illustrations, and color palettes side by side.
+
+## Current experience
+
+### A theatrical entrance
+
+The home page builds the scene with layered HTML and CSS: gradients, shadows, a clipped spotlight, curtains, and repeated seat shapes. Minimal navigation keeps the stage at the center of the composition.
+
+### A paired character profile
+
+The `/profile` page presents two fictional characters through:
+
+- Personality tags, background details, and relationship notes.
+- Distinct color palettes with hover feedback.
+- Full-body and small-format character illustrations.
+- Appearance details arranged in a mirrored, two-column composition.
+- Light and dark color schemes based on the viewer's system preference.
+
+The profile data is grouped into typed-page constants and rendered with React. Character artwork is displayed with Next.js Image.
+
+## Built with
+
+**Next.js App Router · React · TypeScript · Tailwind CSS · CSS gradients and layering**
+
+The current site is a frontend presentation with local character data and image assets. Its emphasis is visual direction, information layout, and translating fictional material into a browsable space.
+
+## Run locally
+
+With a Node.js version supported by Next.js 16 installed:
+
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000, then visit `/profile` to view the character sheet.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Available project commands:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+npm run lint
+npm run build
+npm start
+```
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+app/page.tsx          Theater-inspired landing page
+app/profile/page.tsx  Paired character profiles and palette interaction
+app/layout.tsx        Shared layout, fonts, and metadata
+app/globals.css       Global styles and Tailwind configuration
+public/images/        Character illustrations used by the profile page
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## In progress
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The implemented routes are `/` and `/profile`. The home page also contains **BAG** and **TIMETABLE** links pointing to `/bag` and `/login`; those routes are not yet implemented in this repository.
 
-## Deploy on Vercel
+## What this project explores
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+How can visual design carry a story? Chunghye treats the interface as part of the worldbuilding: the entrance creates an atmosphere, and the profile layout gives the characters a consistent visual language.
